@@ -6,8 +6,15 @@ import AnimatedBackground from '@/components/animated-background';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'My Site',
-  description: 'Welcome to my site',
+  title: 'Senuka Kazuhiro – Software Engineer Portfolio',
+  description:
+    'Official portfolio of Senuka Kazuhiro, software engineering undergraduate building scalable real-world applications.',
+  keywords: [
+    'Senuka Kazuhiro',
+    'Senuka portfolio',
+    'software engineer Senuka',
+    'Senuka developer',
+  ],
 };
 
 export default function RootLayout({

@@ -128,7 +128,7 @@ export default function Hero() {
               }}
               transition={{ duration: 5, repeat: Infinity }}
             >
-              Senuka
+              Senuka Kazuhiro
             </motion.span>
           </h1>
         </motion.div>
