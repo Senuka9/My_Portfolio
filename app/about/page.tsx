@@ -1,7 +1,44 @@
+'use client';
+
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
+import { motion } from 'framer-motion';
 
 export default function AboutPage() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (custom: number) => (({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: custom * 0.1,
+        duration: 0.5,
+      },
+    })),
+  };
+
   const skills = [
     { category: 'Languages', items: ['Java', 'JavaScript', 'HTML/CSS'] },
     { category: 'Frontend', items: ['React', 'JSP/Servlets', 'Next.js','Tailwind CSS'] },
@@ -32,28 +69,58 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6">
-        <div className="max-w-6xl mx-auto text-center space-y-6">
-          <div className="inline-block px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-sm">
-            <span className="text-sm text-cyan-400">Get to know me</span>
-          </div>
-          <h1 className="text-6xl md:text-7xl font-bold leading-tight">
+      <section className="relative pt-32 pb-16 px-6 overflow-hidden">
+        {/* Background animation elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-10 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl"
+            animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-10 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"
+            animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+            transition={{ duration: 10, repeat: Infinity }}
+          />
+        </div>
+
+        <motion.div
+          className="max-w-6xl mx-auto text-center space-y-6 relative z-10"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="inline-block px-4 py-2 rounded-full border border-cyan-500/50 bg-cyan-500/10 backdrop-blur-md" variants={itemVariants}>
+            <span className="text-sm text-cyan-400 font-medium">Get to know me</span>
+          </motion.div>
+          <motion.h1 className="text-6xl md:text-7xl font-bold leading-tight" variants={itemVariants}>
             <span className="text-white">About </span>
             <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Senuka</span>
-          </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p className="text-xl text-slate-300 max-w-3xl mx-auto" variants={itemVariants}>
             Software Engineering undergraduate passionate about building scalable, real-world solutions that solve problems and deliver value.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* Main Content */}
-      <section className="py-24 px-6">
+      <section className="relative py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Who I Am */}
-          <div className="mb-24">
+          <motion.div
+            className="mb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
                 <h2 className="text-4xl font-bold mb-6">Who I Am</h2>
                 <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
                   <p>
@@ -66,9 +133,16 @@ export default function AboutPage() {
                     Every project is an opportunity to deliver value. Whether it&apos;s a booking system, monitoring tool, or web application, I focus on creating solutions that are reliable, maintainable, and genuinely useful.
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="bg-gradient-to-br from-slate-900/60 to-slate-900/30 border border-slate-800/50 rounded-xl p-8">
+              <motion.div
+                className="bg-gradient-to-br from-slate-900/60 to-slate-900/30 border border-slate-800/50 rounded-xl p-8 hover:border-cyan-500/50 transition"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                whileHover={{ y: -5 }}
+              >
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-sm font-semibold text-cyan-400 mb-2">ROLE</h3>
@@ -87,42 +161,85 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Skills */}
-          <div className="mb-24">
+          <motion.div
+            className="mb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-4xl font-bold mb-12">Skills & Technologies</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {skills.map((skillGroup) => (
-                <div key={skillGroup.category} className="bg-slate-900/40 border border-slate-800/50 rounded-xl p-6">
+              {skills.map((skillGroup, groupIndex) => (
+                <motion.div
+                  key={skillGroup.category}
+                  className="bg-slate-900/40 border border-slate-800/50 rounded-xl p-6 hover:border-cyan-500/50 hover:bg-slate-900/60 transition"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: groupIndex * 0.1, duration: 0.6 }}
+                  whileHover={{ y: -4 }}
+                >
                   <h3 className="text-lg font-bold text-cyan-400 mb-4">{skillGroup.category}</h3>
                   <div className="flex flex-wrap gap-2">
-                    {skillGroup.items.map((item) => (
-                      <span
+                    {skillGroup.items.map((item, itemIndex) => (
+                      <motion.span
                         key={item}
-                        className="px-3 py-2 bg-slate-800/50 border border-slate-700/50 text-slate-200 rounded-lg text-sm font-medium hover:border-cyan-500/50 transition"
+                        className="px-3 py-2 bg-slate-800/50 border border-slate-700/50 text-slate-200 rounded-lg text-sm font-medium hover:border-cyan-500/50 hover:bg-slate-700/50 transition cursor-pointer"
+                        custom={itemIndex}
+                        variants={skillVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05, borderColor: 'rgb(34, 211, 238)' }}
                       >
                         {item}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Journey Timeline */}
-          <div className="mb-24">
+          <motion.div
+            className="mb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-4xl font-bold mb-12">My Journey</h2>
             <div className="space-y-8">
               {timeline.map((item, index) => (
-                <div key={index} className="flex gap-6">
+                <motion.div
+                  key={index}
+                  className="flex gap-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                >
                   <div className="flex flex-col items-center">
-                    <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full"></div>
+                    <motion.div
+                      className="w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                    />
                     {index !== timeline.length - 1 && (
-                      <div className="w-1 h-24 bg-gradient-to-b from-cyan-500/50 to-transparent mt-4"></div>
+                      <motion.div
+                        className="w-1 h-24 bg-gradient-to-b from-cyan-500/50 to-transparent mt-4"
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.2, duration: 0.6 }}
+                      />
                     )}
                   </div>
                   <div className="pb-8">
@@ -130,13 +247,20 @@ export default function AboutPage() {
                     <h3 className="text-2xl font-bold text-white mt-1">{item.title}</h3>
                     <p className="text-slate-300 mt-2">{item.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Philosophy */}
-          <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/20 rounded-xl p-8 md:p-12 mb-24">
+          <motion.div
+            className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/20 rounded-xl p-8 md:p-12 mb-24 hover:border-cyan-500/40 transition"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ borderColor: 'rgba(34, 211, 238, 0.6)' }}
+          >
             <h2 className="text-3xl font-bold mb-6">My Philosophy</h2>
             <div className="space-y-4 text-lg text-slate-300 leading-relaxed">
               <p>
@@ -149,21 +273,31 @@ export default function AboutPage() {
                 <span className="text-cyan-400 font-semibold">Continuous Growth:</span> Technology evolves rapidly. I&apos;m committed to staying current with best practices in system design, backend architecture, and modern development tools.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-6">Let&apos;s Work Together</h2>
-            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h2 className="text-3xl font-bold mb-6" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              Let&apos;s Work Together
+            </motion.h2>
+            <motion.p className="text-slate-300 mb-8 max-w-2xl mx-auto" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               Whether you have a project in mind, want to discuss technology, or just want to connect, I&apos;m always interested in conversations about software engineering and building great systems.
-            </p>
-            <a
+            </motion.p>
+            <motion.a
               href="/#contact"
               className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               Get In Touch
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
