@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Senuka Kazuhiro – Software Engineer Portfolio',
   description:
     'Official portfolio of Senuka Kazuhiro, software engineering undergraduate building scalable real-world applications.',
+  verification: {
+    google: "hoel7_Ji4Vcs6iQyC9-_M52KNNb5cqd-dvwsjXlxSL4",
+  },
   keywords: [
     'Senuka Kazuhiro',
     'Senuka portfolio',
