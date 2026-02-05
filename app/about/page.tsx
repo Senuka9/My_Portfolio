@@ -95,10 +95,10 @@ export default function AboutPage() {
           </motion.div>
           <motion.h1 className="text-6xl md:text-7xl font-bold leading-tight" variants={itemVariants}>
             <span className="text-white">About </span>
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Senuka</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Me</span>
           </motion.h1>
           <motion.p className="text-xl text-slate-300 max-w-3xl mx-auto" variants={itemVariants}>
-            Software Engineering undergraduate passionate about building scalable, real-world solutions that solve problems and deliver value.
+            Software Engineering undergraduate focused on building scalable, high-performance web applications and intelligent systems that solve real-world problems.
           </motion.p>
         </motion.div>
       </section>
@@ -124,13 +124,13 @@ export default function AboutPage() {
                 <h2 className="text-4xl font-bold mb-6">Who I Am</h2>
                 <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
                   <p>
-                    I&apos;m Senuka, a Software Engineering undergraduate with a passion for full-stack development. I believe in writing code that matters—software built to solve real problems and scale reliably in production.
+                    I&apos;m Senuka Kazuhiro, a Software Engineering undergraduate student in NSBM Green University,with a strong interest in full-stack development and system design. I enjoy building applications that go beyond just working — they are designed to be scalable, maintainable, and efficient in real-world environments.
                   </p>
                   <p>
-                    I enjoy understanding how the entire stack works: frontend interfaces, backend systems, and database design. I&apos;m drawn to system architecture, API design, and the challenge of building applications that perform well under load. I also enjoy collaborating with others, learning from feedback, and improving through teamwork.
+                    My focus is understanding how the entire system connects — from intuitive user interfaces to robust backend architectures and well-structured databases. I’m particularly interested in API design, performance optimization, and building systems that remain reliable under load.
                   </p>
                   <p>
-                    Every project is an opportunity to deliver value. Whether it&apos;s a booking system, monitoring tool, or web application, I focus on creating solutions that are reliable, maintainable, and genuinely useful.
+                    I approach every project with a builder’s mindset: solve real problems, write clean and maintainable code, and continuously improve through learning and feedback. Whether it’s a booking system, monitoring tool, or web application, I aim to create solutions users can depend on.
                   </p>
                 </div>
               </motion.div>
