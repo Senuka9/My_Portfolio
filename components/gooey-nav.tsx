@@ -147,20 +147,11 @@ const GooeyNav = ({
   useEffect(() => {
     if (!navRef.current || !containerRef.current) return;
     
-    // Use a small delay to ensure DOM is ready and React has updated the DOM
+    // Use a small delay to ensure DOM is ready
     const timer = setTimeout(() => {
-      // Remove active class from all li elements
-      navRef.current.querySelectorAll('li').forEach(li => li.classList.remove('active'));
-      
-      // Add active class to the correct li element
       const activeLi = navRef.current?.querySelectorAll('li')[activeIndex] as HTMLLIElement;
       if (activeLi) {
-        activeLi.classList.add('active');
-        
-        // Position the effect
         updateEffectPosition(activeLi);
-        
-        // Update text effect styling
         if (textRef.current) {
           textRef.current.classList.remove('active');
           void textRef.current.offsetWidth; // trigger reflow
@@ -317,16 +308,13 @@ const GooeyNav = ({
           li::after {
             content: '';
             position: absolute;
-            inset: -4px;
-            border-radius: 9999px;
+            inset: 0;
+            border-radius: 8px;
             background: white;
             opacity: 0;
             transform: scale(0);
             transition: all 0.3s ease;
-            z-index: 0;
-          }
-          li {
-            position: relative;
+            z-index: -1;
           }
         `}
       </style>
@@ -346,7 +334,6 @@ const GooeyNav = ({
                 className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
                   activeIndex === index ? 'active' : ''
                 }`}
-                style={{ position: 'relative', zIndex: activeIndex === index ? 2 : 1 }}
               >
                 <a
                   onClick={(e) => handleClick(e, index)}
