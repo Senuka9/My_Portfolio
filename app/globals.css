@@ -21,6 +21,10 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 28%),
+      linear-gradient(180deg, #020617 0%, #020617 32%, #0f172a 100%);
+    background-attachment: fixed;
   }
 
   :root {

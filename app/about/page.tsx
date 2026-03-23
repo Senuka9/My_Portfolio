@@ -3,65 +3,76 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import { motion } from 'framer-motion';
+import { Terminal, Lightbulb, Coffee, Target, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function AboutPage() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-      },
-    },
-  };
-
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (custom: number) => (({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: custom * 0.1,
-        duration: 0.5,
-      },
-    })),
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
   const skills = [
-    { category: 'Languages', items: ['Java', 'JavaScript', 'HTML/CSS'] },
-    { category: 'Frontend', items: ['React', 'JSP/Servlets', 'Next.js','Tailwind CSS'] },
-    { category: 'Backend', items: ['Node.js', 'RESTful APIs', 'System Design'] },
-    { category: 'Databases', items: ['MySQL', 'Database Design','Docker','MongoDB'] },
+    { 
+      category: 'Languages', 
+      items: [
+        { name: 'Java', desc: 'Core backend development, OOP, APIs' },
+        { name: 'JavaScript / React', desc: 'Modern UI development' }
+      ] 
+    },
+    { 
+      category: 'Frontend', 
+      items: [
+        { name: 'React & Next.js', desc: 'Modern Server-Side UI development' },
+        { name: 'Tailwind CSS', desc: 'Responsive, scalable styling' }
+      ] 
+    },
+    { 
+      category: 'Backend', 
+      items: [
+        { name: 'Node.js', desc: 'REST APIs, server-side logic' },
+        { name: 'System Design', desc: 'Scalable backend architecture' }
+      ] 
+    },
+    { 
+      category: 'Databases & Tools', 
+      items: [
+        { name: 'MySQL & MongoDB', desc: 'Database optimization and structuring' },
+        { name: 'Git & Docker', desc: 'Version control and containerization' }
+      ] 
+    },
   ];
 
   const timeline = [
     {
-      year: '2023-Present',
-      title: 'Software Engineering Student',
-      description: 'Pursuing a degree in Software Engineering with focus on full-stack development and system design.'
+      year: '2023',
+      title: 'Started Software Engineering',
+      description: 'Built my foundation in programming, problem-solving, and core concepts.'
     },
     {
       year: '2024',
-      title: 'Full-Stack Projects',
-      description: 'Built booking systems and monitoring applications integrating frontend, backend, and database layers.'
+      title: 'Built Real Projects',
+      description: 'Developed full-stack applications including booking systems and monitoring tools, integrating frontend, backend, and databases.'
     },
     {
-      year: '2025-Present',
-      title: 'Open Source & Continuous Learning',
-      description: 'Contributing to projects and deepening expertise in backend architecture, APIs, and scalable systems.'
+      year: '2025',
+      title: 'Focused on Backend & Scalability',
+      description: 'Deepening my knowledge in API design, system architecture, and performance optimization while contributing to projects and improving real-world development skills.'
     },
+  ];
+
+  const currentlyDoing = [
+    "Building full-stack applications using React and Node.js",
+    "Learning advanced backend architecture and system design",
+    "Exploring performance optimization and scalable systems"
   ];
 
   return (
@@ -69,183 +80,181 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6 overflow-hidden">
+      <section className="relative pt-32 pb-16 px-6 overflow-hidden min-h-[50vh] flex items-center">
         {/* Background animation elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute top-10 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl"
+            className="absolute top-10 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"
             animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
           <motion.div
-            className="absolute bottom-10 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"
+            className="absolute bottom-10 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]"
             animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
         </div>
 
         <motion.div
-          className="max-w-6xl mx-auto text-center space-y-6 relative z-10"
+          className="max-w-5xl mx-auto text-center space-y-8 relative z-10 mt-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="inline-block px-4 py-2 rounded-full border border-cyan-500/50 bg-cyan-500/10 backdrop-blur-md" variants={itemVariants}>
-            <span className="text-sm text-cyan-400 font-medium">Get to know me</span>
+          <motion.div className="inline-block px-5 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md" variants={itemVariants}>
+            <span className="text-xs uppercase tracking-widest text-cyan-300 font-bold">More About Me</span>
           </motion.div>
-          <motion.h1 className="text-6xl md:text-7xl font-bold leading-tight" variants={itemVariants}>
-            <span className="text-white">About </span>
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Me</span>
+          <motion.h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight" variants={itemVariants}>
+             <span className="text-white">Beyond the </span>
+            <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Code</span>
           </motion.h1>
-          <motion.p className="text-xl text-slate-300 max-w-3xl mx-auto" variants={itemVariants}>
-            Software Engineering undergraduate focused on building scalable, high-performance web applications and intelligent systems that solve real-world problems.
+          <motion.p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto font-light leading-relaxed" variants={itemVariants}>
+            I’m a Software Engineering undergraduate who enjoys turning complex ideas into scalable, real-world applications. I focus on building systems that are not just functional, but reliable, efficient, and built to last.
           </motion.p>
         </motion.div>
       </section>
 
       {/* Main Content */}
-      <section className="relative py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Who I Am */}
+      <section className="relative py-24 px-6 border-t border-white/5 bg-slate-900/20">
+        <div className="max-w-6xl mx-auto space-y-32">
+          
+          {/* Who I Am & Personal Touch Grid */}
           <motion.div
-            className="mb-24"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
+            className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-start"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <h2 className="text-4xl font-bold mb-6">Who I Am</h2>
-                <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
-                  <p>
-                    I&apos;m Senuka Kazuhiro, a Software Engineering undergraduate student in NSBM Green University,with a strong interest in full-stack development and system design. I enjoy building applications that go beyond just working — they are designed to be scalable, maintainable, and efficient in real-world environments.
-                  </p>
-                  <p>
-                    My focus is understanding how the entire system connects — from intuitive user interfaces to robust backend architectures and well-structured databases. I’m particularly interested in API design, performance optimization, and building systems that remain reliable under load.
-                  </p>
-                  <p>
-                    I approach every project with a builder’s mindset: solve real problems, write clean and maintainable code, and continuously improve through learning and feedback. Whether it’s a booking system, monitoring tool, or web application, I aim to create solutions users can depend on.
-                  </p>
-                </div>
-              </motion.div>
+            {/* Left Col: Who I am */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-sm font-bold uppercase tracking-widest text-cyan-400 mb-2">My Background</h2>
+                <h3 className="text-4xl font-bold text-white">Who I Am</h3>
+              </div>
+              <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
+                <p>
+                  I’m <strong className="font-semibold text-white">Senuka Kazuhiru</strong>, a 3rd-year Software Engineering student at NSBM Green University.
+                </p>
+                <p>
+                  I enjoy building full-stack applications with a strong focus on backend architecture and system design. My goal is to create applications that are scalable, maintainable, and efficient under real-world conditions.
+                </p>
+                <p>
+                  I’m especially interested in API design, database optimization, and performance-focused systems.
+                </p>
+              </div>
 
-              <motion.div
-                className="bg-gradient-to-br from-slate-900/60 to-slate-900/30 border border-slate-800/50 rounded-xl p-8 hover:border-cyan-500/50 transition"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-sm font-semibold text-cyan-400 mb-2">ROLE</h3>
-                    <p className="text-2xl font-bold text-white">Software Engineering Undergraduate</p>
-                  </div>
-                  <div className="border-t border-slate-800/50 pt-4">
-                    <h3 className="text-sm font-semibold text-cyan-400 mb-2">SPECIALIZATION</h3>
-                    <p className="text-xl font-semibold text-white">Full-Stack Development</p>
-                  </div>
-                  <div className="border-t border-slate-800/50 pt-4">
-                    <h3 className="text-sm font-semibold text-cyan-400 mb-2">INTERESTS</h3>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-semibold">Backend Systems</span>
-                      <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-semibold">System Design</span>
-                      <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-semibold">AI/ML</span>
-                    </div>
-                  </div>
+              {/* Personal Touch */}
+              <div className="mt-12 bg-slate-900/50 border border-white/5 rounded-3xl p-8 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Coffee className="w-8 h-8 text-pink-400 mb-4" />
+                <h4 className="text-xl font-bold text-white mb-3">A Personal Touch</h4>
+                <p className="text-slate-300 leading-relaxed font-light">
+                  Outside of coding, I enjoy exploring design ideas, watching anime, and constantly learning new technologies. I believe great software isn’t just about functionality — it’s also about creating smooth and enjoyable user experiences.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Col: Currently Doing & What I want */}
+            <div className="space-y-8 mt-2 lg:mt-0">
+              <div className="bg-gradient-to-br from-cyan-950/40 to-slate-900/60 border border-cyan-500/20 rounded-3xl p-8 shadow-2xl backdrop-blur-xl hover:border-cyan-500/40 transition-colors">
+                <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                  <Terminal className="w-5 h-5 text-cyan-400" />
+                  <h4 className="text-lg font-bold text-white uppercase tracking-wider text-sm">What I&apos;m Currently Doing</h4>
                 </div>
-              </motion.div>
+                <ul className="space-y-4">
+                  {currentlyDoing.map((item, i) => (
+                    <li key={i} className="flex gap-4 text-slate-300 text-sm leading-relaxed items-start">
+                      <span className="text-cyan-400 mt-0.5 font-bold">▹</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-emerald-950/30 border border-emerald-500/20 rounded-3xl p-8 shadow-2xl backdrop-blur-xl hover:border-emerald-500/40 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <Target className="w-5 h-5 text-emerald-400" />
+                  <h4 className="text-lg font-bold text-white uppercase tracking-wider text-sm">What I Want</h4>
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  I’m currently looking for <strong className="text-emerald-300 font-semibold">internship opportunities</strong> where I can contribute to real-world projects, grow as an engineer, and be part of an ambitious team.
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Skills */}
+          {/* Detailed Skills Section */}
           <motion.div
-            className="mb-24"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-12">Skills & Technologies</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="text-center mb-16">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-cyan-400 mb-2">Expertise</h2>
+              <h3 className="text-4xl font-bold text-white">Skills with Depth</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {skills.map((skillGroup, groupIndex) => (
-                <motion.div
+                <div
                   key={skillGroup.category}
-                  className="bg-slate-900/40 border border-slate-800/50 rounded-xl p-6 hover:border-cyan-500/50 hover:bg-slate-900/60 transition"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: groupIndex * 0.1, duration: 0.6 }}
-                  whileHover={{ y: -4 }}
+                  className="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-8 hover:border-cyan-500/30 transition-colors duration-500 group"
                 >
-                  <h3 className="text-lg font-bold text-cyan-400 mb-4">{skillGroup.category}</h3>
-                  <div className="flex flex-wrap gap-2">
+                  <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                     <span className="w-2 h-2 rounded-full bg-cyan-400 opacity-50 group-hover:opacity-100 group-hover:animate-pulse transition-all"></span>
+                    {skillGroup.category}
+                  </h4>
+                  <div className="space-y-4">
                     {skillGroup.items.map((item, itemIndex) => (
-                      <motion.span
-                        key={item}
-                        className="px-3 py-2 bg-slate-800/50 border border-slate-700/50 text-slate-200 rounded-lg text-sm font-medium hover:border-cyan-500/50 hover:bg-slate-700/50 transition cursor-pointer"
-                        custom={itemIndex}
-                        variants={skillVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05, borderColor: 'rgb(34, 211, 238)' }}
-                      >
-                        {item}
-                      </motion.span>
+                      <div key={itemIndex} className="bg-white/5 border border-white/5 rounded-2xl p-4 transition-colors hover:bg-white/10">
+                        <p className="font-semibold text-cyan-200">{item.name}</p>
+                        <p className="text-sm text-slate-400 mt-1 font-light leading-relaxed">{item.desc}</p>
+                      </div>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.div>
 
           {/* Journey Timeline */}
           <motion.div
-            className="mb-24"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-12">My Journey</h2>
-            <div className="space-y-8">
+            <div className="text-center mb-16">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-cyan-400 mb-2">Story-Driven</h2>
+              <h3 className="text-4xl font-bold text-white">My Journey</h3>
+            </div>
+            
+            <div className="max-w-4xl mx-auto space-y-12">
               {timeline.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="flex gap-6"
+                  className="relative flex gap-8 md:gap-12"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: index * 0.15, duration: 0.6 }}
                 >
+                  {/* Timeline Graphic */}
                   <div className="flex flex-col items-center">
-                    <motion.div
-                      className="w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                    />
+                    <div className="flex items-center justify-center w-14 h-14 rounded-full border border-cyan-500/30 bg-slate-900 z-10 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+                      <span className="text-xs font-bold text-cyan-400">{item.year}</span>
+                    </div>
                     {index !== timeline.length - 1 && (
-                      <motion.div
-                        className="w-1 h-24 bg-gradient-to-b from-cyan-500/50 to-transparent mt-4"
-                        initial={{ scaleY: 0 }}
-                        whileInView={{ scaleY: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.2, duration: 0.6 }}
-                      />
+                      <div className="w-px h-full bg-gradient-to-b from-cyan-500/50 to-transparent mt-2 opacity-50 absolute top-14 bottom-[-3rem] left-7" />
                     )}
                   </div>
-                  <div className="pb-8">
-                    <p className="text-sm font-semibold text-cyan-400">{item.year}</p>
-                    <h3 className="text-2xl font-bold text-white mt-1">{item.title}</h3>
-                    <p className="text-slate-300 mt-2">{item.description}</p>
+                  
+                  {/* Timeline Content */}
+                  <div className="pb-4 pt-1.5">
+                    <h4 className="text-2xl font-bold text-white tracking-tight">{item.title}</h4>
+                    <p className="text-slate-300 mt-3 text-base leading-relaxed font-light">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -254,50 +263,55 @@ export default function AboutPage() {
 
           {/* Philosophy */}
           <motion.div
-            className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/20 rounded-xl p-8 md:p-12 mb-24 hover:border-cyan-500/40 transition"
-            initial={{ opacity: 0, y: 30 }}
+            className="bg-gradient-to-br from-slate-900/80 to-slate-950 border border-slate-800 rounded-[3rem] p-10 md:p-16 relative overflow-hidden group"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8 }}
-            whileHover={{ borderColor: 'rgba(34, 211, 238, 0.6)' }}
           >
-            <h2 className="text-3xl font-bold mb-6">My Philosophy</h2>
-            <div className="space-y-4 text-lg text-slate-300 leading-relaxed">
-              <p>
-                <span className="text-cyan-400 font-semibold">Build for Impact:</span> I focus on creating software that solves real problems. Every line of code should serve a purpose and deliver value.
-              </p>
-              <p>
-                <span className="text-cyan-400 font-semibold">Understand the Full Picture:</span> Great software engineers understand how frontend, backend, and databases work together. I believe in this holistic approach to development.
-              </p>
-              <p>
-                <span className="text-cyan-400 font-semibold">Continuous Growth:</span> Technology evolves rapidly. I&apos;m committed to staying current with best practices in system design, backend architecture, and modern development tools.
-              </p>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.05),transparent_50%)]" />
+            
+            <div className="text-center mb-12 relative z-10">
+              <Lightbulb className="w-10 h-10 text-emerald-400 mx-auto mb-4" />
+              <h3 className="text-3xl font-bold text-white">My Philosophy</h3>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 relative z-10">
+               <div className="text-center">
+                 <h4 className="text-lg font-bold text-emerald-300 mb-2">Build for Impact</h4>
+                 <p className="text-sm text-slate-400 font-light leading-relaxed">I focus on creating software that solves real problems. Every feature should add value.</p>
+               </div>
+               <div className="text-center">
+                 <h4 className="text-lg font-bold text-cyan-300 mb-2">Think in Systems</h4>
+                 <p className="text-sm text-slate-400 font-light leading-relaxed">Great applications come from understanding how frontend, backend, and databases work together.</p>
+               </div>
+               <div className="text-center">
+                 <h4 className="text-lg font-bold text-purple-300 mb-2">Never Stop Improving</h4>
+                 <p className="text-sm text-slate-400 font-light leading-relaxed">Technology evolves fast — I stay adaptable, continuously learning and refining my skills.</p>
+               </div>
             </div>
           </motion.div>
 
-          {/* CTA */}
+          {/* Bottom CTA */}
           <motion.div
-            className="text-center"
+            className="text-center pt-8 pb-16"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 className="text-3xl font-bold mb-6" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              Let&apos;s Work Together
-            </motion.h2>
-            <motion.p className="text-slate-300 mb-8 max-w-2xl mx-auto" variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              Whether you have a project in mind, want to discuss technology, or just want to connect, I&apos;m always interested in conversations about software engineering and building great systems.
-            </motion.p>
-            <motion.a
+            <h2 className="text-3xl font-bold mb-8 text-white">
+              Ready to create something great?
+            </h2>
+            <Link
               href="/#contact"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition duration-300"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-950 rounded-full font-bold hover:bg-cyan-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
             >
-              Get In Touch
-            </motion.a>
+              Let&apos;s talk
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </motion.div>
+          
         </div>
       </section>
 

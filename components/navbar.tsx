@@ -42,18 +42,14 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4"
+        className="fixed top-4 md:top-6 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none"
       >
         <nav 
-          className={`max-w-5xl mx-auto px-6 rounded-full transition-all duration-500 ${
-            scrolled
-              ? 'bg-slate-950/80 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20'
-              : 'bg-transparent'
-          }`}
+          className="pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-5 md:px-6 h-14 rounded-full bg-slate-950/80 backdrop-blur-xl border border-white/10 shadow-xl"
         >
-          <div className="flex items-center justify-between h-14">
+          <div className="flex items-center justify-between w-full md:w-auto md:gap-8">
             {/* Logo */}
-            <Link href="/" className="relative group flex items-center gap-1">
+            <Link href="/" className="relative group flex items-center gap-1 shrink-0">
               <span className="text-slate-500 font-medium">&lt;</span>
               <span className="text-lg font-semibold tracking-tight text-white">
                 Senuka
@@ -62,14 +58,14 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-full ${
+                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
                       isActive 
                         ? 'text-white bg-white/10' 
                         : 'text-slate-400 hover:text-white hover:bg-white/5'
@@ -82,10 +78,10 @@ export default function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:block">
+            <div className="hidden md:block shrink-0">
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-slate-950 bg-white rounded-full hover:bg-slate-200 transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-slate-950 bg-white rounded-full hover:scale-105 active:scale-95 transition-all duration-200"
               >
                 Get in touch
               </Link>
@@ -94,7 +90,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative w-10 h-10 flex items-center justify-center text-white"
+              className="md:hidden relative w-10 h-10 flex items-center justify-center text-white ml-auto"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-5">

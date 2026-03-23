@@ -34,9 +34,9 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Secondary Orb - Blue */}
+      {/* Secondary Orb - Steel blue */}
       <motion.div
-        className="absolute top-1/3 -left-32 w-80 h-80 bg-gradient-to-tr from-blue-500/15 to-purple-500/10 rounded-full blur-3xl"
+        className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-gradient-to-tr from-sky-400/16 to-slate-300/8 blur-3xl"
         animate={{
           y: [0, -80, 100, -50, 0],
           x: [0, -60, 70, -100, 0],
@@ -50,7 +50,7 @@ export default function AnimatedBackground() {
 
       {/* Tertiary Orb - Cyan accent */}
       <motion.div
-        className="absolute -bottom-40 right-1/4 w-96 h-96 bg-gradient-to-tl from-cyan-500/15 to-blue-500/5 rounded-full blur-3xl"
+        className="absolute -bottom-40 right-1/4 h-96 w-96 rounded-full bg-gradient-to-tl from-cyan-500/15 to-sky-500/6 blur-3xl"
         animate={{
           y: [0, -60, 80, 20, 0],
           x: [0, 100, -90, 70, 0],
