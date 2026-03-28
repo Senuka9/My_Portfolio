@@ -54,7 +54,7 @@ export default function MiniAbout() {
             <div className="mt-10">
               <Link
                 href="/about"
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-cyan-500/10 border border-cyan-500/30 px-8 py-4 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-500/20 hover:text-cyan-100 hover:scale-[1.02] hover:border-cyan-500/50 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.4)]"
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-cyan-500/10 border border-cyan-500/30 px-8 py-4 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-500/20 hover:text-cyan-100 hover:scale-[1.02] hover:border-cyan-500/50 hover:shadow-[0_0_20px_-5px_rgba(6,182,212,0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               >
                 Learn more about me
                 <div className="relative flex h-5 w-5 items-center justify-center overflow-hidden">

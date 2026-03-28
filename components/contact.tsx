@@ -1,8 +1,51 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [useFormFallback, setUseFormFallback] = useState(false);
+  const { toast } = useToast();
+
+  const handleEmailjsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const SERVICE_ID = "service_eox73kx";
+      const TEMPLATE_ID = "ptp2crc";
+      const PUBLIC_KEY = "XTyI25B_tOx2wQ0xi";
+
+      await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        formRef.current,
+        PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      formRef.current.reset();
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      toast({
+        variant: "destructive",
+        title: "Failed to send",
+        description: "Something went wrong. Please try again or email me directly.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -172,22 +215,87 @@ export default function Contact() {
           </motion.div>
         </motion.div>
 
-        {/* CTA Button */}
+        {/* Contact Form */}
         <motion.div
-          className="flex justify-center pt-8"
+          className="max-w-2xl mx-auto mt-16 p-8 border border-slate-800 rounded-2xl bg-slate-900/30 backdrop-blur-sm"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <motion.a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=senuka501@gmail.com"
-            className="px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition duration-300 inline-block"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Start a Conversation
-          </motion.a>
+          <div className="mb-6 text-center">
+            <h3 className="text-2xl font-bold text-white mb-2">Send me a message</h3>
+            <p className="text-slate-400">Fill out the form below and I'll get back to you as soon as possible.</p>
+          </div>
+          
+          <form ref={formRef} onSubmit={handleEmailjsSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label htmlFor="user_name" className="text-sm font-medium text-slate-300">Your Name</label>
+                <input
+                  type="text"
+                  id="user_name"
+                  name="user_name"
+                  required
+                  placeholder="John Doe"
+                  className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="user_email" className="text-sm font-medium text-slate-300">Your Email</label>
+                <input
+                  type="email"
+                  id="user_email"
+                  name="user_email"
+                  required
+                  placeholder="john@example.com"
+                  className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none"
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-sm font-medium text-slate-300">Your Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="How can I help you?"
+                className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none resize-none"
+              ></textarea>
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full py-4 rounded-lg font-semibold text-white transition duration-300 flex items-center justify-center gap-2 ${
+                isSubmitting 
+                  ? 'bg-slate-800 text-slate-400 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-lg hover:shadow-cyan-500/25 cursor-pointer'
+              }`}
+              whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+            >
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                'Send Message'
+              )}
+            </motion.button>
+          </form>
+          
+          <div className="mt-6 text-center">
+            <p className="text-sm text-slate-500">
+              Prefer to email directly? <a href="mailto:senuka501@gmail.com" className="text-cyan-400 hover:underline">senuka501@gmail.com</a>
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

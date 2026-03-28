@@ -78,10 +78,17 @@ export default function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden md:block shrink-0">
+            <div className="hidden md:flex shrink-0 items-center gap-3">
+              <a
+                href="/resume.pdf"
+                download="Senuka_Resume.pdf"
+                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-white border border-white/20 hover:bg-white/10 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+              >
+                Resume
+              </a>
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-slate-950 bg-white rounded-full hover:scale-105 active:scale-95 transition-all duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-slate-950 bg-white rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               >
                 Get in touch
               </Link>
@@ -155,12 +162,20 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.3 }}
-                  className="pt-6"
+                  className="pt-6 flex flex-col gap-4"
                 >
+                  <a
+                    href="/resume.pdf"
+                    download="Senuka_Resume.pdf"
+                    onClick={() => setIsOpen(false)}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-white border border-white/20 hover:bg-white/10 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                  >
+                    Download Resume
+                  </a>
                   <Link
                     href="/#contact"
                     onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-slate-950 bg-white rounded-full"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-slate-950 bg-white rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
                   >
                     Get in touch
                   </Link>

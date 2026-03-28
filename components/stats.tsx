@@ -32,21 +32,24 @@ function AnimatedCounter({ target, duration = 2 }: { target: number; duration?: 
 }
 
 export default function Stats() {
-  const [repoCount, setRepoCount] = useState(0);
+  const [repoCount, setRepoCount] = useState<number | null>(null);
   
   useEffect(() => {
     // Dynamically fetch public repos from GitHub
     fetch('https://api.github.com/users/Senuka9')
       .then(res => res.json())
       .then(data => setRepoCount(data.public_repos || 0))
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        setRepoCount(5); // fallback value if fail so it becomes 10 below
+      });
   }, []);
 
-  // GitHub Repositories + 5 (fallback to 10 if fetch fails)
-  const projectsDelivered = repoCount > 0 ? repoCount + 5 : 10;
+  // GitHub Repositories + 5 (fallback to 10 if fetch hasn't completed or fails)
+  const projectsDelivered = repoCount !== null ? repoCount + 5 : 10;
   
   // Starting year is 2022. Auto increments every year (e.g. 2026 -> 4, 2027 -> 5)
-  const yearsExperience = new Date().getFullYear() - 2022;
+  const yearsExperience = Math.max(1, new Date().getFullYear() - 2022);
 
   const stats = [
     {
@@ -104,7 +107,7 @@ export default function Stats() {
                   <AnimatedCounter target={stat.value} />
                   {stat.suffix}
                 </h3>
-                <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-slate-400 transition-colors duration-500 group-hover:text-slate-300">
+                <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-slate-300 transition-colors duration-500 group-hover:text-white">
                   {stat.title}
                 </p>
               </div>

@@ -339,7 +339,7 @@ const GooeyNav = ({
                   onClick={(e) => handleClick(e, index)}
                   href={item.href}
                   onKeyDown={(e) => handleKeyDown(e, index)}
-                  className="outline-none py-[0.6em] px-[1em] inline-block"
+                  className="outline-none py-[0.6em] px-[1em] inline-block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 rounded-full"
                 >
                   {item.label}
                 </a>

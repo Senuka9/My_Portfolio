@@ -41,6 +41,11 @@ export default function LogoWall() {
         .group:hover .animate-logo-scroll {
           animation-play-state: paused;
         }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-logo-scroll {
+            animation-duration: 200s;
+          }
+        }
       `}</style>
     </section>
   );
