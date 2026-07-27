@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import AnimatedBackground from '@/components/animated-background';
+import Preloader from '@/components/preloader';
 import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${spaceGrotesk.className}`}>
+        <Preloader />
         <AnimatedBackground />
         <div className="relative z-10">{children}</div>
         <Toaster />

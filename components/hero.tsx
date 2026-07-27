@@ -6,29 +6,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, BadgeCheck, Code2, Github, Linkedin, Orbit, Send, Sparkles } from 'lucide-react';
 
-function TypewriterText({ text }: { text: string }) {
+function TypewriterText({ text }: { text?: string }) {
+  const phrases = ['FULL-STACK DEVELOPER', 'JAVA DEVELOPER', 'MODERN WEB BUILDER'];
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [displayed, setDisplayed] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let current = '';
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        current += text[index];
-        setDisplayed(current);
-        index += 1;
-      } else {
-        clearInterval(interval);
-      }
-    }, 34);
+    const fullText = text || phrases[currentPhraseIndex];
+    const typingSpeed = isDeleting ? 30 : 60;
 
-    return () => clearInterval(interval);
-  }, [text]);
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayed(fullText.substring(0, displayed.length + 1));
+        if (displayed.length === fullText.length) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        setDisplayed(fullText.substring(0, displayed.length - 1));
+        if (displayed.length === 0) {
+          setIsDeleting(false);
+          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [displayed, isDeleting, currentPhraseIndex, text]);
 
   return (
     <div className="mt-6 flex items-center gap-3" aria-live="polite" aria-atomic="true">
-      <span className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300/90">
-        {displayed}
+      <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300">
+        {displayed || 'FULL-STACK DEVELOPER'}
       </span>
       <span className="h-5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
     </div>
@@ -82,7 +91,7 @@ export default function Hero() {
               Software Engineering undergraduate focused on elegant full-stack products, thoughtful backend architecture, and interfaces that make a strong first impression.
             </motion.p>
 
-            <TypewriterText text="Full-Stack Developer | Java Enthusiast | React Builder" />
+            <TypewriterText text="FULL-STACK DEVELOPER, JAVA DEVELOPER, MODERN WEB BUILDER" />
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
