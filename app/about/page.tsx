@@ -3,7 +3,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import { motion } from 'framer-motion';
-import { Terminal, Lightbulb, Coffee, Target, ArrowRight } from 'lucide-react';
+import { Terminal, Lightbulb, Coffee, Target, ArrowRight, User, Calendar, CreditCard, MapPin, Zap, BrainCircuit, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AboutPage() {
@@ -20,33 +20,56 @@ export default function AboutPage() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
+  const personalInfo = [
+    {
+      icon: <User className="w-5 h-5 text-cyan-400" />,
+      label: 'Full Name',
+      value: 'H.W. Senuka Kazuhiro',
+    },
+    {
+      icon: <Calendar className="w-5 h-5 text-emerald-400" />,
+      label: 'Date of Birth / Age',
+      value: '2006 January 07 (Age 20)',
+    },
+    {
+      icon: <CreditCard className="w-5 h-5 text-purple-400" />,
+      label: 'ID Number (NIC)',
+      value: '200600702685',
+    },
+    {
+      icon: <MapPin className="w-5 h-5 text-pink-400" />,
+      label: 'Address',
+      value: '287/20, Silver Garden, Watareka, Padukka',
+    },
+  ];
+
   const skills = [
     { 
-      category: 'Languages', 
+      category: 'Core & Languages', 
       items: [
-        { name: 'Java', desc: 'Core backend development, OOP, APIs' },
-        { name: 'JavaScript / React', desc: 'Modern UI development' }
+        { name: 'Java Programming', desc: 'Object-oriented software, APIs, core data structures & logic' },
+        { name: 'JavaScript & TypeScript', desc: 'Modern web scripting, async logic, type safety' }
       ] 
     },
     { 
-      category: 'Frontend', 
+      category: 'Frontend Frameworks', 
       items: [
-        { name: 'React & Next.js', desc: 'Modern Server-Side UI development' },
-        { name: 'Tailwind CSS', desc: 'Responsive, scalable styling' }
+        { name: 'React & Next.js', desc: 'Modern Server-Side & Client-Side UI development' },
+        { name: 'Tailwind CSS', desc: 'Responsive, scalable styling & modern aesthetic UI' }
       ] 
     },
     { 
-      category: 'Backend', 
+      category: 'Backend & Server', 
       items: [
-        { name: 'Node.js', desc: 'REST APIs, server-side logic' },
-        { name: 'System Design', desc: 'Scalable backend architecture' }
+        { name: 'Node.js & Express', desc: 'REST APIs, server-side microservices, middleware' },
+        { name: 'System Design', desc: 'Scalable backend architecture & database optimization' }
       ] 
     },
     { 
       category: 'Databases & Tools', 
       items: [
-        { name: 'MySQL & MongoDB', desc: 'Database optimization and structuring' },
-        { name: 'Git & Docker', desc: 'Version control and containerization' }
+        { name: 'MySQL & MongoDB', desc: 'Relational & NoSQL database management' },
+        { name: 'Git & Docker', desc: 'Version control workflows and containerization' }
       ] 
     },
   ];
@@ -55,24 +78,24 @@ export default function AboutPage() {
     {
       year: '2023',
       title: 'Started Software Engineering',
-      description: 'Built my foundation in programming, problem-solving, and core concepts.'
+      description: 'Built my foundation in programming concepts, algorithms, and Java fundamentals.'
     },
     {
       year: '2024',
       title: 'Built Real Projects',
-      description: 'Developed full-stack applications including booking systems and monitoring tools, integrating frontend, backend, and databases.'
+      description: 'Developed full-stack applications with Java, React, Node.js, and databases.'
     },
     {
       year: '2025',
-      title: 'Focused on Backend & Scalability',
-      description: 'Deepening my knowledge in API design, system architecture, and performance optimization while contributing to projects and improving real-world development skills.'
+      title: 'Focused on Backend & Next.js',
+      description: 'Deepening knowledge in API design, system architecture, Next.js, and performance optimization.'
     },
   ];
 
   const currentlyDoing = [
-    "Building full-stack applications using React and Node.js",
-    "Learning advanced backend architecture and system design",
-    "Exploring performance optimization and scalable systems"
+    "Building full-stack applications using React, Next.js, and Node.js",
+    "Developing backend services and API architectures with Java & Node.js",
+    "Exploring advanced system design, database optimization, and performance"
   ];
 
   return (
@@ -80,7 +103,7 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6 overflow-hidden min-h-[50vh] flex items-center">
+      <section className="relative flex min-h-[50vh] items-center overflow-hidden px-6 pb-16 pt-32">
         {/* Background animation elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -96,29 +119,29 @@ export default function AboutPage() {
         </div>
 
         <motion.div
-          className="max-w-5xl mx-auto text-center space-y-8 relative z-10 mt-10"
+          className="section-shell relative z-10 mt-10 text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="inline-block px-5 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md" variants={itemVariants}>
-            <span className="text-xs uppercase tracking-widest text-cyan-300 font-bold">More About Me</span>
+          <motion.div className="section-kicker mx-auto mb-5 w-fit" variants={itemVariants}>
+            More about me
           </motion.div>
           <motion.h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight" variants={itemVariants}>
              <span className="text-white">Beyond the </span>
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Code</span>
           </motion.h1>
-          <motion.p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto font-light leading-relaxed" variants={itemVariants}>
-            I’m a Software Engineering undergraduate who enjoys turning complex ideas into scalable, real-world applications. I focus on building systems that are not just functional, but reliable, efficient, and built to last.
+          <motion.p className="section-copy mx-auto mt-6 max-w-4xl text-center text-xl md:text-2xl" variants={itemVariants}>
+            I’m a Software Engineering undergraduate passionate about Java programming, React, Node.js, and Next.js. I thrive on building efficient systems and rapidly mastering new technologies.
           </motion.p>
         </motion.div>
       </section>
 
       {/* Main Content */}
-      <section className="relative py-24 px-6 border-t border-white/5 bg-slate-900/20">
-        <div className="max-w-6xl mx-auto space-y-32">
+      <section className="relative border-t border-white/5 bg-slate-900/20 px-6 py-24">
+        <div className="section-shell space-y-32">
           
-          {/* Who I Am & Personal Touch Grid */}
+          {/* Personal Overview & Bio */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,23 +157,47 @@ export default function AboutPage() {
               </div>
               <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
                 <p>
-                  I’m <strong className="font-semibold text-white">Senuka Kazuhiru</strong>, a 3rd-year Software Engineering student at NSBM Green University.
+                  I’m <strong className="font-semibold text-white">H.W. Senuka Kazuhiro</strong>, a Software Engineering student at NSBM Green University.
                 </p>
                 <p>
-                  I enjoy building full-stack applications with a strong focus on backend architecture and system design. My goal is to create applications that are scalable, maintainable, and efficient under real-world conditions.
+                  My primary technical interests lie in <strong className="text-cyan-300 font-semibold">Java programming</strong>, along with modern web ecosystems like <strong className="text-emerald-300 font-semibold">React, Node.js, and Next.js</strong>. I enjoy crafting full-stack applications with a strong focus on clean architecture, scalable backends, and intuitive user experiences.
                 </p>
                 <p>
-                  I’m especially interested in API design, database optimization, and performance-focused systems.
+                  One of my core strengths is my <strong className="text-white font-semibold">rapid learning ability</strong> — I can quickly adapt to and learn any new programming language, framework, or developer tool required for a project.
                 </p>
               </div>
 
-              {/* Personal Touch */}
-              <div className="mt-12 bg-slate-900/50 border border-white/5 rounded-3xl p-8 relative overflow-hidden group">
+              {/* Personal Info Grid Card */}
+              <div className="mt-8 bg-slate-900/60 border border-cyan-500/20 rounded-3xl p-8 relative overflow-hidden group shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                  <Sparkles className="w-5 h-5 text-cyan-400" />
+                  <h4 className="text-lg font-bold text-white uppercase tracking-wider text-sm">Personal Details</h4>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {personalInfo.map((info, idx) => (
+                    <div key={idx} className="flex gap-4 items-start bg-white/[0.03] p-4 rounded-2xl border border-white/5 hover:border-cyan-500/30 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-slate-950 border border-white/10 shrink-0">
+                        {info.icon}
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">{info.label}</p>
+                        <p className="text-sm font-semibold text-white mt-1">{info.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Personal Touch & Quick Adaptability */}
+              <div className="bg-slate-900/50 border border-white/5 rounded-3xl p-8 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Coffee className="w-8 h-8 text-pink-400 mb-4" />
-                <h4 className="text-xl font-bold text-white mb-3">A Personal Touch</h4>
+                <div className="flex items-center gap-3 mb-3">
+                  <BrainCircuit className="w-6 h-6 text-cyan-400" />
+                  <h4 className="text-xl font-bold text-white">Quick Learner & Adaptable</h4>
+                </div>
                 <p className="text-slate-300 leading-relaxed font-light">
-                  Outside of coding, I enjoy exploring design ideas, watching anime, and constantly learning new technologies. I believe great software isn’t just about functionality — it’s also about creating smooth and enjoyable user experiences.
+                  I embrace new challenges eagerly. Beyond Java, React, Node, and Next.js, I possess a versatile mindset that allows me to pick up new tech stacks and programming languages on the fly, ensuring I can solve any engineering challenge efficiently.
                 </p>
               </div>
             </div>
@@ -178,7 +225,7 @@ export default function AboutPage() {
                   <h4 className="text-lg font-bold text-white uppercase tracking-wider text-sm">What I Want</h4>
                 </div>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  I’m currently looking for <strong className="text-emerald-300 font-semibold">internship opportunities</strong> where I can contribute to real-world projects, grow as an engineer, and be part of an ambitious team.
+                  I’m currently looking for <strong className="text-emerald-300 font-semibold">internship opportunities</strong> where I can contribute to real-world software, collaborate with high-performing teams, and leverage my skills in Java, Node, React, and Next.js.
                 </p>
               </div>
             </div>

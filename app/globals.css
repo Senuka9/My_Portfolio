@@ -18,12 +18,14 @@
 
   body {
     @apply bg-slate-950 text-slate-50;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Space Grotesk', 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
     background-image:
-      radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 28%),
-      linear-gradient(180deg, #020617 0%, #020617 32%, #0f172a 100%);
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 26%),
+      radial-gradient(circle at 80% 10%, rgba(59, 130, 246, 0.16), transparent 24%),
+      radial-gradient(circle at bottom, rgba(16, 185, 129, 0.12), transparent 30%),
+      linear-gradient(180deg, #020617 0%, #020617 28%, #0f172a 100%);
     background-attachment: fixed;
   }
 
@@ -133,9 +135,10 @@
 
   .bg-grid-pattern {
     background-image:
-      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(to right, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+      radial-gradient(circle at center, rgba(255, 255, 255, 0.015) 0, transparent 60%);
+    background-size: 52px 52px, 52px 52px, 100% 100%;
   }
 
   .bg-dots-pattern {
@@ -144,7 +147,35 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-200;
+  }
+
+  .section-title {
+    @apply text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-slate-300 sm:text-lg;
+  }
+
+  .glass-panel {
+    @apply rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-[0_30px_80px_-45px_rgba(2,6,23,0.95)];
+  }
+
+  .glow-ring {
+    @apply absolute inset-0 rounded-[inherit] bg-gradient-to-br from-cyan-400/10 via-transparent to-emerald-400/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100;
+  }
+
+  .animated-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent;
   }
 
   .gradient-border {
@@ -317,6 +348,21 @@
 .animate-gradient-shift {
   animation: gradient-shift 5s ease infinite;
   background-size: 200% 200%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .animation-delay-150 {

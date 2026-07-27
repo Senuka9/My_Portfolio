@@ -110,7 +110,7 @@ export default function LearningPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-6 overflow-hidden">
+      <section className="relative overflow-hidden px-6 pb-16 pt-32">
         {/* Background animation elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -126,27 +126,27 @@ export default function LearningPage() {
         </div>
 
         <motion.div
-          className="max-w-6xl mx-auto text-center space-y-6 relative z-10"
+          className="section-shell relative z-10 text-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="inline-block px-4 py-2 rounded-full border border-cyan-500/50 bg-cyan-500/10 backdrop-blur-md" variants={itemVariants}>
-            <span className="text-sm text-cyan-400 font-medium">Growth Mindset</span>
+          <motion.div className="section-kicker mx-auto mb-5 w-fit" variants={itemVariants}>
+            Growth mindset
           </motion.div>
           <motion.h1 className="text-6xl md:text-7xl font-bold leading-tight" variants={itemVariants}>
             <span className="text-white">My </span>
             <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Learning Journey</span>
           </motion.h1>
-          <motion.p className="text-xl text-slate-300 max-w-3xl mx-auto" variants={itemVariants}>
+          <motion.p className="section-copy mx-auto mt-6 max-w-3xl text-center text-xl" variants={itemVariants}>
             I don&apos;t believe in staying at beginner level. I focus on understanding deeper software concepts, architecture, and building systems that scale.
           </motion.p>
         </motion.div>
       </section>
 
       {/* Main Content */}
-      <section className="relative py-24 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative px-6 py-24">
+        <div className="section-shell">
           {/* Currently Learning */}
           <motion.div
             className="mb-32"

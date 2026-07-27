@@ -1,208 +1,267 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Code2, Github, Linkedin, Send } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Code2, Github, Linkedin, Orbit, Send, Sparkles } from 'lucide-react';
 
 function TypewriterText({ text }: { text: string }) {
-  const [displayed, setDisplayed] = useState("");
-  
+  const [displayed, setDisplayed] = useState('');
+
   useEffect(() => {
-    let current = "";
-    let i = 0;
+    let current = '';
+    let index = 0;
     const interval = setInterval(() => {
-      if (i < text.length) {
-        current += text[i];
+      if (index < text.length) {
+        current += text[index];
         setDisplayed(current);
-        i++;
+        index += 1;
       } else {
         clearInterval(interval);
       }
-    }, 40);
+    }, 34);
+
     return () => clearInterval(interval);
   }, [text]);
 
   return (
-    <div className="flex items-center h-6 mt-6">
-      <span className="text-sm font-bold uppercase tracking-[0.15em] text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]">
+    <div className="mt-6 flex items-center gap-3" aria-live="polite" aria-atomic="true">
+      <span className="text-xs font-bold uppercase tracking-[0.35em] text-cyan-300/90">
         {displayed}
       </span>
-      <span className="w-1.5 h-4 bg-emerald-400 ml-1.5 animate-pulse rounded-full" />
+      <span className="h-5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
     </div>
   );
 }
 
+const corePills = [
+  'Full-Stack Systems',
+  'Modern Interfaces',
+  'Scalable Architecture',
+  'Java • React • Node.js',
+];
+
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden px-6 pb-20 pt-28 sm:pb-32 sm:pt-36 lg:px-8 lg:pt-40 min-h-[90vh] flex items-center">
-      {/* Background Glows */}
-      <div className="absolute inset-x-0 top-0 h-[50rem] bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.12),transparent_42%)]" />
-      <div className="absolute inset-x-0 top-0 h-[40rem] bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.15),transparent_50%)]" />
-      <div className="absolute left-1/2 top-10 h-32 w-[60%] -translate-x-1/2 rounded-full bg-cyan-400/10 blur-[100px]" />
+    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28 lg:pt-40">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.1),transparent_24%),radial-gradient(circle_at_bottom,rgba(16,185,129,0.08),transparent_30%)]" />
+      <div className="absolute inset-x-0 top-0 h-[36rem] bg-[linear-gradient(180deg,rgba(2,6,23,0.08)_0%,rgba(2,6,23,0.7)_66%,rgba(2,6,23,1)_100%)]" />
+      <div className="absolute left-1/2 top-16 h-40 w-[70%] -translate-x-1/2 rounded-full bg-cyan-400/10 blur-[120px]" />
 
-      <div className="relative mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
-          
-          {/* Text Content */}
+      <div className="section-shell relative z-10">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10"
+            className="relative max-w-3xl"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 mt-4"
-            >
-              <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-cyan-300">
-                Available for internships
-              </span>
-            </motion.div>
+            <div className="section-kicker mb-6 w-fit">
+              <Sparkles className="h-3.5 w-3.5" />
+              Available for internships and collaborations
+            </div>
 
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              className="max-w-3xl text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-[4.5rem] leading-[1.1]"
+              transition={{ delay: 0.1, duration: 0.7 }}
+              className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-[5.2rem] lg:leading-[0.95]"
             >
-              Designing <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">scalable backend systems</span> and crafting modern web experiences.
+              I design <span className="bg-linear-to-r bg-clip-text text-transparent from-cyan-300 via-sky-300 to-emerald-300">clean systems</span>
+              <br />
+              and build interfaces that feel premium.
             </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-            >
-              <TypewriterText text="Full-Stack Developer | Java Enthusiast | React Builder" />
-            </motion.div>
-
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-              className="mt-6 text-xl font-medium text-cyan-50"
+              transition={{ delay: 0.2, duration: 0.7 }}
+              className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl"
             >
-              Clean code. Smart systems. Better user experiences.
+              Software Engineering undergraduate focused on elegant full-stack products, thoughtful backend architecture, and interfaces that make a strong first impression.
             </motion.p>
 
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.7 }}
-              className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-300/90 font-light"
-            >
-              Software Engineering undergraduate focused on building scalable full-stack applications using <span className="font-semibold text-white">Java, React, and Node.js</span>.
-            </motion.p>
+            <TypewriterText text="Full-Stack Developer | Java Enthusiast | React Builder" />
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-4 sm:gap-5"
+              transition={{ delay: 0.3, duration: 0.7 }}
+              className="mt-10 flex flex-wrap items-center gap-4"
             >
               <Link
                 href="/projects"
-                className="group relative inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-semibold text-slate-950 transition-all duration-300 hover:scale-[1.02] hover:bg-slate-100 hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]"
+                className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-slate-950 shadow-[0_18px_45px_-22px_rgba(255,255,255,0.45)] transition duration-300 hover:-translate-y-0.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               >
-                View my work
-                <div className="relative flex h-5 w-5 items-center justify-center overflow-hidden">
-                  <ArrowRight className="absolute h-4 w-4 transition-transform duration-300 group-hover:translate-x-5" />
-                  <ArrowRight className="absolute h-4 w-4 -translate-x-5 transition-transform duration-300 group-hover:translate-x-0" />
-                </div>
+                Explore work
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <a
                 href="/resume.pdf"
                 download="Senuka_Resume.pdf"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-medium text-slate-200 backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-7 py-4 text-sm font-medium text-slate-100 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               >
                 Download Resume
               </a>
 
               <Link
-                href="#contact" 
-                className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-8 py-4 text-sm font-medium text-cyan-300 backdrop-blur-md transition-all duration-300 hover:border-cyan-500/50 hover:bg-cyan-500/20 hover:text-cyan-100 hover:scale-[1.02] shadow-[0_0_20px_-5px_rgba(6,182,212,0.3)]"
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-7 py-4 text-sm font-semibold text-cyan-200 transition duration-300 hover:-translate-y-0.5 hover:border-cyan-300/50 hover:bg-cyan-400/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               >
                 Contact Me
                 <Send className="h-4 w-4" />
               </Link>
             </motion.div>
-            
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.7 }}
-              className="mt-8 flex items-center gap-4 pl-2"
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="mt-10 grid gap-3 sm:grid-cols-2"
             >
-              <a 
-                href="https://github.com/Senuka9" 
-                target="_blank" 
+              <div className="glass-panel p-4">
+                <div className="flex items-center gap-3 text-cyan-200">
+                  <BadgeCheck className="h-4 w-4" />
+                  <span className="text-xs font-bold uppercase tracking-[0.28em]">Focus</span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">
+                  Backend architecture, frontend polish, and shipping interfaces that feel intentional.
+                </p>
+              </div>
+              <div className="glass-panel p-4">
+                <div className="flex items-center gap-3 text-emerald-200">
+                  <Orbit className="h-4 w-4" />
+                  <span className="text-xs font-bold uppercase tracking-[0.28em]">Approach</span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">
+                  Strong visuals, careful motion, and clean systems that scale beyond a single page.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+              className="mt-8 flex flex-wrap gap-2.5"
+            >
+              {corePills.map((pill) => (
+                <span
+                  key={pill}
+                  className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-300"
+                >
+                  {pill}
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.55, duration: 0.6 }}
+              className="mt-9 flex items-center gap-4 pl-1"
+            >
+              <a
+                href="https://github.com/Senuka9"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-300"
+                className="rounded-full border border-white/10 bg-white/5 p-3 text-slate-300 transition hover:-translate-y-0.5 hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                aria-label="GitHub profile"
               >
                 <Github className="h-5 w-5" />
               </a>
-              <a 
-                href="https://www.linkedin.com/in/senuka-kazuhiro-703b0a366/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BTtpp9GUCRaCdicyD66yIFQ%3D%3D" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/senuka-kazuhiro-703b0a366/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BTtpp9GUCRaCdicyD66yIFQ%3D%3D"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-300"
+                className="rounded-full border border-white/10 bg-white/5 p-3 text-slate-300 transition hover:-translate-y-0.5 hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                aria-label="LinkedIn profile"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
+              <div className="h-px w-24 bg-gradient-to-r from-white/20 to-transparent" />
             </motion.div>
           </motion.div>
 
-          {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-sm lg:max-w-[400px] lg:justify-self-end group mt-10 lg:mt-0"
+            transition={{ delay: 0.15, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mx-auto w-full max-w-[460px] lg:justify-self-end"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-xl group-hover:border-cyan-500/30 transition-colors duration-500">
-              {/* Inner subtle glow */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-tr from-cyan-500/10 via-transparent to-emerald-500/10 opacity-50 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-              
-              {/* Glass reflection */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
-              <div className="absolute -inset-[100%] z-10 top-0 w-[50%] -rotate-45 block bg-gradient-to-r from-transparent via-white/10 to-transparent transform translate-x-[-200%] transition-transform duration-1000 group-hover:translate-x-[400%] pointer-events-none" />
+            <div className="pointer-events-none absolute -inset-10 -z-10">
+              <div className="absolute inset-0 rounded-[3rem] bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.12),transparent_45%)] blur-2xl" />
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/15"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 36, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
+              />
 
-              {/* The Actual Image */}
-              <div className="absolute inset-0">
+              <motion.div
+                className="absolute left-[18%] top-[18%] h-3.5 w-3.5 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.9)]"
+                animate={{ x: [0, 26, 0], y: [0, 18, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.div
+                className="absolute right-[14%] top-[28%] h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.8)]"
+                animate={{ x: [0, -20, 0], y: [0, 14, 0] }}
+                transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+              />
+              <motion.div
+                className="absolute bottom-[22%] left-[26%] h-2.5 w-2.5 rounded-full bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.8)]"
+                animate={{ x: [0, 18, 0], y: [0, -12, 0] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+              />
+
+              <div className="absolute inset-x-[18%] top-[34%] h-px bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent" />
+              <div className="absolute inset-x-[12%] bottom-[28%] h-px bg-gradient-to-r from-transparent via-emerald-300/25 to-transparent" />
+              <div className="absolute left-[24%] top-[24%] h-[52%] w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+              <div className="absolute right-[22%] top-[20%] h-[58%] w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+            </div>
+
+            <div className="group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900/50 shadow-[0_35px_100px_-45px_rgba(2,6,23,0.95)] backdrop-blur-xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.1),transparent_28%)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/[0.07] via-transparent to-transparent" />
+
+              <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src="/images/senuka-1.png"
-                  alt="Senuka Kazuhiro"
+                  alt="Senuka Kazuhiro portrait"
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                  sizes="(max-width: 768px) 100vw, 460px"
                   priority
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
 
-              {/* Decorative Floating Card */}
-              <div className="absolute bottom-6 left-6 right-6 z-20 rounded-2xl border border-white/10 bg-black/60 p-4 backdrop-blur-md transition-transform duration-500 group-hover:-translate-y-2">
+              <div className="absolute bottom-5 left-5 right-5 rounded-[1.5rem] border border-white/10 bg-slate-950/80 p-5 backdrop-blur-lg">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-cyan-500/20 bg-cyan-500/10 text-cyan-400">
-                    <Code2 className="h-5 w-5" />
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/10 text-cyan-200">
+                    <Code2 className="h-6 w-6" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-white">Full-Stack Developer</p>
-                    <p className="mt-1 text-[11px] text-slate-400 font-medium tracking-wide">Java • Node.js • React • Next.js</p>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.26em] text-slate-400">
+                      Java • Node.js • React • Next.js
+                    </p>
                   </div>
                 </div>
               </div>
+
+              <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-slate-950/75 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-200 backdrop-blur-md">
+                Ready to build
+              </div>
             </div>
 
-            {/* Glowing ring behind the image */}
-            <div className="absolute -inset-4 -z-10 rounded-[3rem] bg-gradient-to-tr from-cyan-500/20 to-emerald-500/20 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-tr from-cyan-400/20 via-transparent to-emerald-400/20 blur-3xl opacity-60" />
           </motion.div>
-
         </div>
       </div>
     </section>

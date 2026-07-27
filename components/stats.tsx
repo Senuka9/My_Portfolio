@@ -28,7 +28,7 @@ function AnimatedCounter({ target, duration = 2 }: { target: number; duration?: 
     }
   }, [isInView, target, duration]);
 
-  return <span ref={ref}>{count}</span>;
+  return <motion.span ref={ref} animate={{ opacity: [0.92, 1, 0.92] }} transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}>{count}</motion.span>;
 }
 
 export default function Stats() {
@@ -54,6 +54,7 @@ export default function Stats() {
   const stats = [
     {
       title: "Projects Delivered",
+      subtitle: "Real work, shipped and maintained",
       value: projectsDelivered,
       suffix: "+",
       icon: <Briefcase className="h-7 w-7 text-fuchsia-400" />,
@@ -63,6 +64,7 @@ export default function Stats() {
     },
     {
       title: "Years Experience",
+      subtitle: "Year-over-year growth in practice",
       value: yearsExperience,
       suffix: "+",
       icon: <Code className="h-7 w-7 text-pink-400" />,
@@ -72,6 +74,7 @@ export default function Stats() {
     },
     {
       title: "Technologies Used",
+      subtitle: "Stack breadth across frontend and backend",
       value: 15,
       suffix: "+",
       icon: <Layers className="h-7 w-7 text-purple-400" />,
@@ -82,38 +85,68 @@ export default function Stats() {
   ];
 
   return (
-    <section className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+    <section className="relative z-10 py-16 sm:py-24">
+      <div className="section-shell">
+        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="section-kicker mb-4 w-fit">Proof of momentum</div>
+            <h2 className="section-title max-w-2xl">Small numbers, but the work behind them is serious.</h2>
+          </div>
+          <p className="section-copy md:max-w-xl">
+            These stats are meant to feel more like a confidence bar than decoration. They summarize the type of work I like to ship: steady, technical, and real.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -8, scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.15 * index, ease: "easeOut" }}
-            className={`group relative overflow-hidden rounded-[2rem] border border-white/5 bg-slate-900/40 p-10 backdrop-blur-md transition-all duration-500 hover:shadow-[0_0_40px_-15px_var(--glow-color)] ${stat.borderHover}`}
+            className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/40 p-8 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_30px_60px_-35px_var(--glow-color)] ${stat.borderHover}`}
             style={{ "--glow-color": stat.glowColor } as React.CSSProperties}
           >
-            {/* Background glowing glow */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-10`} />
+            <motion.div
+              className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-15`}
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 8 + index, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             
-            <div className="relative flex flex-col items-center justify-center gap-6 text-center">
-              <div className={`flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:bg-white/10`}>
-                {stat.icon}
+            <div className="relative flex h-full flex-col">
+              <div className="flex items-center justify-between gap-4">
+                <motion.div
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-inner transition-transform duration-500 group-hover:bg-white/10`}
+                  whileHover={{ rotate: 8, scale: 1.08 }}
+                >
+                  {stat.icon}
+                </motion.div>
+                <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-300">
+                  Live metric
+                </div>
               </div>
               
-              <div>
-                <h3 className={`text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b ${stat.color} drop-shadow-sm`}>
+              <div className="mt-8 flex-1">
+                <div className={`h-px w-20 rounded-full bg-gradient-to-r ${stat.color}`} />
+                <h3 className={`mt-6 text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b ${stat.color} drop-shadow-sm`}>
                   <AnimatedCounter target={stat.value} />
                   {stat.suffix}
                 </h3>
-                <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-slate-300 transition-colors duration-500 group-hover:text-white">
+                <p className="mt-4 text-sm font-bold uppercase tracking-[0.28em] text-slate-200 transition-colors duration-500 group-hover:text-white">
                   {stat.title}
+                </p>
+                <p className="mt-3 max-w-xs text-sm leading-6 text-slate-400 transition-colors duration-500 group-hover:text-slate-300">
+                  {stat.subtitle}
                 </p>
               </div>
             </div>
           </motion.div>
         ))}
+        </div>
       </div>
     </section>
   );

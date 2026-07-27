@@ -117,40 +117,35 @@ export default async function ProjectsPage() {
     <div className="min-h-screen bg-slate-950 text-white antialiased">
       <Navbar />
       
-      <section className="relative py-24 px-6 pt-32 overflow-hidden min-h-[80vh]">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-40 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+      <section className="relative min-h-[80vh] overflow-hidden px-6 pb-24 pt-32">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-16 right-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[120px]" />
+          <div className="absolute bottom-24 left-0 h-96 w-96 rounded-full bg-indigo-500/10 blur-[120px]" />
         </div>
         
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Page Header */}
-          <div className="mb-20 text-center max-w-3xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-px bg-cyan-500/50"></div>
-              <span className="text-sm font-bold tracking-widest text-cyan-400 uppercase">My Work</span>
-              <div className="w-12 h-px bg-cyan-500/50"></div>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">
-              <span className="text-white">Featured </span>
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">Projects</span>
+        <div className="section-shell relative z-10">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="section-kicker mx-auto mb-5 w-fit">Selected work</div>
+            <h1 className="section-title">
+              A more curated look at what I&apos;ve built.
             </h1>
-            <p className="text-xl text-slate-300 font-light leading-relaxed">
-              A curated collection of my latest work and technical experiments. All repositories are dynamically fetched and updated continuously from my GitHub.
+            <p className="section-copy mx-auto mt-6 max-w-3xl text-center">
+              These are live repositories pulled from GitHub, but presented more like case studies than a simple grid. The goal is to make the work feel easier to scan and more premium to explore.
             </p>
           </div>
 
           {/* Projects Grid Client Component */}
-          <ProjectsGrid projects={reposWithLanguagesAndReadme} />
+          <div className="mt-16">
+            <ProjectsGrid projects={reposWithLanguagesAndReadme} />
+          </div>
 
           {/* View on GitHub CTA */}
-          <div className="flex justify-center mt-24 pt-12 border-t border-white/5">
+          <div className="mt-24 flex justify-center border-t border-white/5 pt-12">
             <a
               href="https://github.com/Senuka9"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 bg-white text-slate-950 rounded-full font-bold hover:bg-cyan-50 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center gap-3"
+              className="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-bold text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-50 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
             >
               View Complete Archive
               <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24">

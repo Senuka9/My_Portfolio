@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { useToast } from '@/hooks/use-toast';
+import { ArrowRight, Mail, Sparkles, MessageSquareText, MapPin, Clock3, Github, Linkedin } from 'lucide-react';
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [useFormFallback, setUseFormFallback] = useState(false);
   const { toast } = useToast();
 
   const handleEmailjsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,285 +18,209 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const SERVICE_ID = "service_eox73kx";
-      const TEMPLATE_ID = "ptp2crc";
-      const PUBLIC_KEY = "XTyI25B_tOx2wQ0xi";
-
       await emailjs.sendForm(
-        SERVICE_ID,
-        TEMPLATE_ID,
+        'service_eox73kx',
+        'ptp2crc',
         formRef.current,
-        PUBLIC_KEY
+        'XTyI25B_tOx2wQ0xi'
       );
 
       toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: 'Message sent',
+        description: 'Thanks for reaching out. I will get back to you soon.',
       });
       formRef.current.reset();
     } catch (error) {
       console.error('Email sending failed:', error);
       toast({
-        variant: "destructive",
-        title: "Failed to send",
-        description: "Something went wrong. Please try again or email me directly.",
+        variant: 'destructive',
+        title: 'Could not send message',
+        description: 'Please try again or email me directly.',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+  const contactLinks = [
+    {
+      icon: <Github className="h-4 w-4" />,
+      label: 'GitHub',
+      value: 'Senuka9',
+      href: 'https://github.com/Senuka9',
     },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-      },
+    {
+      icon: <Linkedin className="h-4 w-4" />,
+      label: 'LinkedIn',
+      value: 'Senuka Kazuhiro',
+      href: 'https://www.linkedin.com/in/senuka-kazuhiro-703b0a366/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BTtpp9GUCRaCdicyD66yIFQ%3D%3D',
     },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
+    {
+      icon: <Mail className="h-4 w-4" />,
+      label: 'Email',
+      value: 'senuka501@gmail.com',
+      href: 'mailto:senuka501@gmail.com',
     },
-    hover: {
-      y: -8,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+  ];
 
   return (
-    <section id="contact" className="relative py-24 px-6 bg-gradient-to-b from-slate-950 to-slate-900/50 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          className="flex items-center gap-2 mb-4"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div
-            className="w-2 h-2 bg-cyan-500 rounded-full"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-          <span className="text-sm font-semibold text-cyan-400">LET'S TALK</span>
-        </motion.div>
-
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-5xl md:text-6xl font-bold">
-            <span className="text-white">Let&apos;s Build Something</span>
-            <br />
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">Amazing</span>
-          </h2>
-          <p className="text-cyan-400 text-lg font-semibold mt-4 mb-4">
-            Open to internships, collaborations, and tech discussions.
-          </p>
-          <p className="text-slate-300 mt-2 max-w-2xl">
-            Whether you have an exciting project in mind, need technical consultation, or just want to discuss technology—I&apos;d love to hear from you.
-          </p>
-        </motion.div>
-
-        {/* Contact Cards */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {/* GitHub */}
-          <motion.div
-            variants={cardVariants}
-            whileHover="hover"
-            className="p-6 border border-slate-800 rounded-lg hover:border-cyan-500/50 transition bg-slate-900/30 hover:bg-slate-900/50 group cursor-pointer"
-          >
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:from-cyan-600 group-hover:to-blue-600 transition duration-300"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-            </motion.div>
-            <h3 className="text-lg font-semibold text-white mb-1">GitHub</h3>
-            <p className="text-sm text-slate-400 mb-4">Check out my repositories</p>
-            <motion.a
-              href="https://github.com/Senuka9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition flex items-center gap-1"
-              whileHover={{ x: 4 }}
-            >
-              Connect <span>→</span>
-            </motion.a>
-          </motion.div>
-
-          {/* LinkedIn */}
-          <motion.div
-            variants={cardVariants}
-            whileHover="hover"
-            className="p-6 border border-slate-800 rounded-lg hover:border-cyan-500/50 transition bg-slate-900/30 hover:bg-slate-900/50 group cursor-pointer"
-          >
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:from-blue-600 group-hover:to-cyan-600 transition duration-300"
-              animate={{ rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-            >
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.814 0-9.752h3.554v1.381c.43-.664 1.199-1.608 2.925-1.608 2.136 0 3.738 1.395 3.738 4.393v5.586zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.708 0-.956.768-1.708 1.959-1.708 1.19 0 1.914.752 1.939 1.708 0 .949-.749 1.708-1.983 1.708zm1.582 11.597H3.635V9.236h3.284v11.216zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
-              </svg>
-            </motion.div>
-            <h3 className="text-lg font-semibold text-white mb-1">LinkedIn</h3>
-            <p className="text-sm text-slate-400 mb-4">Let's connect professionally</p>
-            <motion.a
-              href="https://www.linkedin.com/in/senuka-kazuhiro-703b0a366/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BTtpp9GUCRaCdicyD66yIFQ%3D%3D"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition flex items-center gap-1"
-              whileHover={{ x: 4 }}
-            >
-              Connect <span>→</span>
-            </motion.a>
-          </motion.div>
-
-          {/* Email */}
-          <motion.div
-            variants={cardVariants}
-            whileHover="hover"
-            className="p-6 border border-slate-800 rounded-lg hover:border-cyan-500/50 transition bg-slate-900/30 hover:bg-slate-900/50 group cursor-pointer"
-          >
-            <motion.div
-              className="w-12 h-12 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center mb-4 group-hover:from-cyan-600 group-hover:to-blue-600 transition duration-300"
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-            >
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </motion.div>
-            <h3 className="text-lg font-semibold text-white mb-1">Email</h3>
-            <p className="text-sm text-slate-400 mb-4">Send me an email</p>
-            <motion.a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=senuka501@gmail.com"
-              className="text-cyan-400 font-semibold text-sm hover:text-cyan-300 transition flex items-center gap-1"
-              whileHover={{ x: 4 }}
-            >
-              Connect <span>→</span>
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Contact Form */}
-        <motion.div
-          className="max-w-2xl mx-auto mt-16 p-8 border border-slate-800 rounded-2xl bg-slate-900/30 backdrop-blur-sm"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <div className="mb-6 text-center">
-            <h3 className="text-2xl font-bold text-white mb-2">Send me a message</h3>
-            <p className="text-slate-400">Fill out the form below and I'll get back to you as soon as possible.</p>
+    <section id="contact" className="relative overflow-hidden py-24 sm:py-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_24%)]" />
+      <div className="section-shell relative z-10">
+        <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="section-kicker mb-4 w-fit">
+              <Sparkles className="h-3.5 w-3.5" />
+              Let&apos;s build something sharp
+            </div>
+            <h2 className="section-title max-w-2xl">A contact section that feels as polished as the work itself.</h2>
           </div>
-          
-          <form ref={formRef} onSubmit={handleEmailjsSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="user_name" className="text-sm font-medium text-slate-300">Your Name</label>
-                <input
-                  type="text"
-                  id="user_name"
-                  name="user_name"
-                  required
-                  placeholder="John Doe"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none"
-                />
+          <p className="section-copy md:max-w-xl">
+            If you want to collaborate, hire, or just talk architecture and product design, send a message through the form or reach me directly through one of the links.
+          </p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.7 }}
+            className="glass-panel relative overflow-hidden p-8"
+          >
+            <div className="glow-ring" />
+            <div className="relative">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-200">
+                  <MessageSquareText className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-200">Contact</p>
+                  <p className="mt-1 text-sm text-slate-400">Fastest way to reach me</p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <label htmlFor="user_email" className="text-sm font-medium text-slate-300">Your Email</label>
-                <input
-                  type="email"
-                  id="user_email"
-                  name="user_email"
-                  required
-                  placeholder="john@example.com"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none"
-                />
+
+              <div className="space-y-4">
+                {contactLinks.map((item) => (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    whileHover={{ y: -3, scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm transition duration-300 hover:-translate-y-0.5 hover:border-cyan-400/20 hover:bg-white/[0.05] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                  >
+                    <span className="flex items-center gap-3 text-slate-200">
+                      <motion.span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-slate-950/70 text-cyan-200" whileHover={{ rotate: 6, scale: 1.08 }}>
+                        {item.icon}
+                      </motion.span>
+                      <span>
+                        <span className="block text-[11px] font-bold uppercase tracking-[0.22em] text-slate-500">{item.label}</span>
+                        <span className="block mt-1 font-medium text-white">{item.value}</span>
+                      </span>
+                    </span>
+                    <motion.div whileHover={{ x: 3 }}>
+                      <ArrowRight className="h-4 w-4 text-slate-500" />
+                    </motion.div>
+                  </motion.a>
+                ))}
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <div className="flex items-center gap-2 text-cyan-200">
+                    <MapPin className="h-4 w-4" />
+                    <span className="text-[11px] font-bold uppercase tracking-[0.22em]">Location</span>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">Based in Sri Lanka, open to remote and collaborative opportunities.</p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <div className="flex items-center gap-2 text-emerald-200">
+                    <Clock3 className="h-4 w-4" />
+                    <span className="text-[11px] font-bold uppercase tracking-[0.22em]">Response</span>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">I usually reply within a day or two depending on workload.</p>
+                </div>
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-medium text-slate-300">Your Message</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="How can I help you?"
-                className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors outline-none resize-none"
-              ></textarea>
-            </div>
+          </motion.div>
 
-            <motion.button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 rounded-lg font-semibold text-white transition duration-300 flex items-center justify-center gap-2 ${
-                isSubmitting 
-                  ? 'bg-slate-800 text-slate-400 cursor-not-allowed' 
-                  : 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-lg hover:shadow-cyan-500/25 cursor-pointer'
-              }`}
-              whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
-              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-            >
-              {isSubmitting ? (
-                <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Sending...
-                </>
-              ) : (
-                'Send Message'
-              )}
-            </motion.button>
-          </form>
-          
-          <div className="mt-6 text-center">
-            <p className="text-sm text-slate-500">
-              Prefer to email directly? <a href="mailto:senuka501@gmail.com" className="text-cyan-400 hover:underline">senuka501@gmail.com</a>
-            </p>
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="glass-panel relative overflow-hidden p-8 sm:p-10"
+          >
+            <div className="glow-ring" />
+            <div className="relative">
+              <div className="mb-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-200">Send a message</p>
+                <h3 className="mt-2 text-3xl font-bold text-white">Tell me about your project</h3>
+                <p className="mt-3 max-w-xl text-sm leading-7 text-slate-400">
+                  A short note is enough. Share what you need, the timeline, and what outcome you want.
+                </p>
+              </div>
+
+              <form ref={formRef} onSubmit={handleEmailjsSubmit} className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label htmlFor="user_name" className="text-sm font-medium text-slate-300">Your Name</label>
+                    <input
+                      type="text"
+                      id="user_name"
+                      name="user_name"
+                      required
+                      placeholder="Your name"
+                      className="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3.5 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/40"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="user_email" className="text-sm font-medium text-slate-300">Your Email</label>
+                    <input
+                      type="email"
+                      id="user_email"
+                      name="user_email"
+                      required
+                      placeholder="Your Email"
+                      className="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3.5 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/40"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium text-slate-300">Your Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    placeholder="Describe your idea, timeline, or what you need help with."
+                    className="w-full resize-none rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3.5 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/40"
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={!isSubmitting ? { scale: 1.01, y: -1 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.99 } : {}}
+                  animate={!isSubmitting ? { y: [0, -1, 0] } : undefined}
+                  transition={!isSubmitting ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : undefined}
+                  className={`inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-semibold transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 ${
+                    isSubmitting
+                      ? 'cursor-not-allowed bg-slate-800 text-slate-400'
+                      : 'bg-linear-to-r from-cyan-400 to-emerald-400 text-slate-950 shadow-[0_20px_40px_-25px_rgba(34,211,238,0.6)] hover:shadow-[0_25px_50px_-25px_rgba(16,185,129,0.6)]'
+                  }`}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {!isSubmitting && <ArrowRight className="h-4 w-4" />}
+                </motion.button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

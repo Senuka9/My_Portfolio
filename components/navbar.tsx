@@ -45,11 +45,11 @@ export default function Navbar() {
         className="fixed top-4 md:top-6 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none"
       >
         <nav 
-          className="pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-5 md:px-6 h-14 rounded-full bg-slate-950/80 backdrop-blur-xl border border-white/10 shadow-xl"
+          className="pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-5 md:px-6 h-14 rounded-full bg-slate-950/70 backdrop-blur-2xl border border-white/10 shadow-[0_20px_60px_-30px_rgba(2,6,23,0.9)]"
         >
           <div className="flex items-center justify-between w-full md:w-auto md:gap-8">
             {/* Logo */}
-            <Link href="/" className="relative group flex items-center gap-1 shrink-0">
+            <Link href="/" className="relative group flex items-center gap-1 shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400 rounded-full">
               <span className="text-slate-500 font-medium">&lt;</span>
               <span className="text-lg font-semibold tracking-tight text-white">
                 Senuka
@@ -62,42 +62,43 @@ export default function Navbar() {
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
-                      isActive 
-                        ? 'text-white bg-white/10' 
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                  <motion.div key={item.href} whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }}>
+                    <Link
+                      href={item.href}
+                      className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
+                        isActive 
+                            ? 'text-white bg-white/10 shadow-inner' 
+                            : 'text-slate-400 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:flex shrink-0 items-center gap-3">
-              <a
-                href="/resume.pdf"
-                download="Senuka_Resume.pdf"
-                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-white border border-white/20 hover:bg-white/10 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-              >
+              <motion.a whileHover={{ y: -1, scale: 1.03 }} whileTap={{ scale: 0.98 }} href="/resume.pdf" download="Senuka_Resume.pdf" className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-white border border-white/20 hover:bg-white/10 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400">
                 Resume
-              </a>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-slate-950 bg-white rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-              >
-                Get in touch
-              </Link>
+              </motion.a>
+              <motion.div whileHover={{ y: -1, scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium text-slate-950 bg-white rounded-full hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+                >
+                  Get in touch
+                </Link>
+              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative w-10 h-10 flex items-center justify-center text-white ml-auto"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="md:hidden relative ml-auto flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-5">
@@ -117,7 +118,7 @@ export default function Navbar() {
                   }`}
                 />
               </div>
-            </button>
+            </motion.button>
           </div>
         </nav>
       </motion.header>
