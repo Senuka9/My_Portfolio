@@ -91,7 +91,7 @@ export default function Hero() {
               Software Engineering undergraduate focused on elegant full-stack products, thoughtful backend architecture, and interfaces that make a strong first impression.
             </motion.p>
 
-            <TypewriterText text="FULL-STACK DEVELOPER, JAVA DEVELOPER, MODERN WEB BUILDER" />
+            <TypewriterText />
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}

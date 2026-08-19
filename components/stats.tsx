@@ -63,8 +63,8 @@ export default function Stats() {
       borderHover: "group-hover:border-fuchsia-500/50"
     },
     {
-      title: "Years Experience",
-      subtitle: "Year-over-year growth in practice",
+      title: "Years Building",
+      subtitle: "Academic and personal projects",
       value: yearsExperience,
       suffix: "+",
       icon: <Code className="h-7 w-7 text-pink-400" />,

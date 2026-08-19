@@ -9,34 +9,91 @@ import { ArrowRight, Mail, Sparkles, MessageSquareText, MapPin, Clock3, Github, 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
 
   const handleEmailjsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formRef.current) return;
 
+    const formData = new FormData(formRef.current);
+    const userName = (formData.get('user_name') as string)?.trim() || '';
+    const userEmail = (formData.get('user_email') as string)?.trim() || '';
+    const message = (formData.get('message') as string)?.trim() || '';
+
+    if (!userName || !userEmail || !message) {
+      toast({
+        variant: 'destructive',
+        title: 'Missing fields',
+        description: 'Please enter your name, email, and message.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    try {
-      await emailjs.sendForm(
-        'service_eox73kx',
-        'ptp2crc',
-        formRef.current,
-        'XTyI25B_tOx2wQ0xi'
-      );
+    const templateParams = {
+      user_name: userName,
+      from_name: userName,
+      name: userName,
+      user_email: userEmail,
+      from_email: userEmail,
+      email: userEmail,
+      reply_to: userEmail,
+      message: message,
+      to_name: 'Senuka Kazuhiro',
+    };
 
+    const SERVICE_ID = 'service_eox73kx';
+    const TEMPLATE_ID = 'ptp2crc';
+    const PUBLIC_KEY = 'XTyI25B_tOx2wQ0xi';
+
+    try {
+      emailjs.init({ publicKey: PUBLIC_KEY });
+
+      // Attempt 1: Send via emailjs.send with dictionary params
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      setIsSuccess(true);
       toast({
-        title: 'Message sent',
+        title: 'Message sent successfully! 🚀',
         description: 'Thanks for reaching out. I will get back to you soon.',
       });
       formRef.current.reset();
+      setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
-      console.error('Email sending failed:', error);
-      toast({
-        variant: 'destructive',
-        title: 'Could not send message',
-        description: 'Please try again or email me directly.',
-      });
+      console.warn('EmailJS dictionary send failed, trying sendForm...', error);
+
+      try {
+        // Attempt 2: Send via emailjs.sendForm
+        await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY);
+
+        setIsSuccess(true);
+        toast({
+          title: 'Message sent successfully! 🚀',
+          description: 'Thanks for reaching out. I will get back to you soon.',
+        });
+        formRef.current.reset();
+        setTimeout(() => setIsSuccess(false), 5000);
+      } catch (fallbackError) {
+        console.error('All EmailJS methods failed, triggering mailto fallback:', fallbackError);
+
+        // Attempt 3: Direct mailto link fallback with clipboard copy
+        try {
+          await navigator.clipboard.writeText(`Name: ${userName}\nEmail: ${userEmail}\nMessage: ${message}`);
+        } catch (_) {}
+
+        const mailtoUrl = `mailto:senuka501@gmail.com?subject=${encodeURIComponent(
+          `Portfolio Contact from ${userName}`
+        )}&body=${encodeURIComponent(`Name: ${userName}\nEmail: ${userEmail}\n\nMessage:\n${message}`)}`;
+
+        window.location.href = mailtoUrl;
+
+        toast({
+          title: 'Opened Email Client',
+          description: 'EmailJS service unavailable. Pre-filled email client & copied message to clipboard!',
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
