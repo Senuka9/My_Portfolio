@@ -8,7 +8,8 @@ async function test() {
       body: JSON.stringify({
         service_id: 'service_eox73kx',
         template_id: 'ptp2crc',
-        user_id: 'XTyI25B_tOx2wQ0xi',
+        user_id: 'bMucXSO6JpUNoGunLjUX-',
+        accessToken: 'Y-5qg-RXi4N63dbJq',
         template_params: {
           user_name: 'Test',
           user_email: 'test@example.com',
