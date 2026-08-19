@@ -46,7 +46,7 @@ export default function Contact() {
 
     const SERVICE_ID = 'service_eox73kx';
     const TEMPLATE_ID = 'ptp2crc';
-    const PUBLIC_KEY = 'XTyI25B_tOx2wQ0xi';
+    const PUBLIC_KEY = 'bMucXSO6JpUNoGunLjUX-';
 
     try {
       emailjs.init({ publicKey: PUBLIC_KEY });
