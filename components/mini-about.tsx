@@ -7,7 +7,7 @@ import { ArrowRight, GraduationCap, MonitorSmartphone, Rocket, Sprout } from 'lu
 const highlights = [
   {
     icon: <GraduationCap className="h-5 w-5 text-cyan-400" />,
-    text: "Software Engineering Undergraduate"
+    text: "Software Engineering Graduate (Second Class Lower)"
   },
   {
     icon: <MonitorSmartphone className="h-5 w-5 text-emerald-400" />,
@@ -47,7 +47,7 @@ export default function MiniAbout() {
             </p>
             <div className="mt-8 space-y-6 text-lg leading-relaxed text-slate-300">
               <p>
-                I’m <strong className="text-white font-semibold">Senuka Kazuhiro</strong>, a Software Engineering student passionate about building scalable and high-performance software. My core strengths reside in Java backend development, along with modern web technologies including React, Node.js, and Next.js.
+                I’m <strong className="text-white font-semibold">Senuka Kazuhiro</strong>, a Software Engineering graduate passionate about building scalable and high-performance software. My core strengths reside in Java backend development, along with modern web technologies including React, Node.js, and Next.js.
               </p>
               <p>
                 I possess strong analytical thinking and quick learning capabilities — capable of rapidly picking up any new programming language or framework required to build top-tier solutions.

@@ -90,6 +90,11 @@ export default function AboutPage() {
       title: 'Focused on Backend & Next.js',
       description: 'Deepening knowledge in API design, system architecture, Next.js, and performance optimization.'
     },
+    {
+      year: '2026',
+      title: 'Graduated from University',
+      description: 'Completed my BSc (Hons) in Software Engineering, achieving a Second Class (Lower Division) degree.'
+    },
   ];
 
   const currentlyDoing = [
@@ -132,7 +137,7 @@ export default function AboutPage() {
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Code</span>
           </motion.h1>
           <motion.p className="section-copy mx-auto mt-6 max-w-4xl text-center text-xl md:text-2xl" variants={itemVariants}>
-            I’m a Software Engineering undergraduate passionate about Java programming, React, Node.js, and Next.js. I thrive on building efficient systems and rapidly mastering new technologies.
+            I’m a Software Engineering graduate passionate about Java programming, React, Node.js, and Next.js. I thrive on building efficient systems and rapidly mastering new technologies.
           </motion.p>
         </motion.div>
       </section>
@@ -157,7 +162,7 @@ export default function AboutPage() {
               </div>
               <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
                 <p>
-                  I’m <strong className="font-semibold text-white">H.W. Senuka Kazuhiro</strong>, a Software Engineering student at NSBM Green University.
+                  I’m <strong className="font-semibold text-white">H.W. Senuka Kazuhiro</strong>, a Software Engineering graduate from NSBM Green University with a Second Class (Lower Division) degree.
                 </p>
                 <p>
                   My primary technical interests lie in <strong className="text-cyan-300 font-semibold">Java programming</strong>, along with modern web ecosystems like <strong className="text-emerald-300 font-semibold">React, Node.js, and Next.js</strong>. I enjoy crafting full-stack applications with a strong focus on clean architecture, scalable backends, and intuitive user experiences.

@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Senuka Kazuhiro – Software Engineer Portfolio',
   description:
-    'Official portfolio of Senuka Kazuhiro, software engineering undergraduate building scalable real-world applications.',
+    'Official portfolio of Senuka Kazuhiro, software engineering graduate building scalable real-world applications.',
   icons: {
     icon: [
       { url: '/favicon.png', type: 'image/png' },

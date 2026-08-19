@@ -88,7 +88,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.7 }}
               className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl"
             >
-              Software Engineering undergraduate focused on elegant full-stack products, thoughtful backend architecture, and interfaces that make a strong first impression.
+              Software Engineering graduate focused on elegant full-stack products, thoughtful backend architecture, and interfaces that make a strong first impression.
             </motion.p>
 
             <TypewriterText />
