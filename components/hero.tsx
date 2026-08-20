@@ -14,25 +14,26 @@ function TypewriterText({ text }: { text?: string }) {
 
   useEffect(() => {
     const fullText = text || phrases[currentPhraseIndex];
-    const typingSpeed = isDeleting ? 30 : 60;
+    let timer: NodeJS.Timeout;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayed(fullText.substring(0, displayed.length + 1));
-        if (displayed.length === fullText.length) {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        setDisplayed(fullText.substring(0, displayed.length - 1));
-        if (displayed.length === 0) {
-          setIsDeleting(false);
-          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
-        }
-      }
-    }, typingSpeed);
+    if (!isDeleting && displayed === fullText) {
+      timer = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayed === '') {
+      setIsDeleting(false);
+      setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+    } else {
+      timer = setTimeout(() => {
+        const nextDisplayed = isDeleting
+          ? fullText.substring(0, displayed.length - 1)
+          : fullText.substring(0, displayed.length + 1);
+        setDisplayed(nextDisplayed);
+      }, isDeleting ? 30 : 60);
+    }
 
     return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayed, isDeleting, currentPhraseIndex, text]);
+
 
   return (
     <div className="mt-6 flex items-center gap-3" aria-live="polite" aria-atomic="true">
