@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Sparkles, ArrowUpRight } from 'lucide-react';
@@ -18,6 +18,13 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const pathname = usePathname();
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +54,7 @@ export default function Navbar() {
         className="fixed top-4 md:top-6 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none"
       >
         <nav
-          className={`pointer-events-auto relative flex items-center justify-between gap-4 md:gap-8 px-5 md:px-6 h-14 rounded-full border transition-all duration-500 ${
+          className={`pointer-events-auto relative flex items-center justify-between gap-4 md:gap-8 px-5 md:px-6 h-14 rounded-full border overflow-hidden transition-all duration-500 ${
             scrolled
               ? 'bg-slate-950/85 border-cyan-500/20 shadow-[0_20px_50px_-15px_rgba(34,211,238,0.25)] backdrop-blur-2xl'
               : 'bg-slate-950/70 border-white/10 shadow-[0_20px_60px_-30px_rgba(2,6,23,0.9)] backdrop-blur-2xl'
@@ -187,6 +194,12 @@ export default function Navbar() {
               </div>
             </motion.button>
           </div>
+          
+          {/* Scroll Progress Bar */}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 opacity-75"
+            style={{ scaleX }}
+          />
         </nav>
       </motion.header>
 
