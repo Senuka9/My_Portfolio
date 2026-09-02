@@ -1,6 +1,8 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import ProjectsGrid from '@/components/projects-grid';
+import FeaturedProject from '@/components/featured-project';
+import ProjectsHeader from '@/components/projects-header';
 
 interface Repository {
   id: number;
@@ -124,18 +126,15 @@ export default async function ProjectsPage() {
         </div>
         
         <div className="section-shell relative z-10">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="section-kicker mx-auto mb-5 w-fit">Selected work</div>
-            <h1 className="section-title">
-              A more curated look at what I&apos;ve built.
-            </h1>
-            <p className="section-copy mx-auto mt-6 max-w-3xl text-center">
-              These are live repositories pulled from GitHub, but presented more like case studies than a simple grid. The goal is to make the work feel easier to scan and more premium to explore.
-            </p>
+          <ProjectsHeader />
+
+          {/* Featured Project */}
+          <div className="mt-16">
+            <FeaturedProject />
           </div>
 
           {/* Projects Grid Client Component */}
-          <div className="mt-16">
+          <div className="mt-8">
             <ProjectsGrid projects={reposWithLanguagesAndReadme} />
           </div>
 
