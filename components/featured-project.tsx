@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, ArrowUpRight } from 'lucide-react';
+import { Code2, ArrowUpRight, Github } from 'lucide-react';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 export default function FeaturedProject() {
@@ -62,7 +63,7 @@ export default function FeaturedProject() {
             <span className="rounded-full border bg-blue-500/10 text-blue-200 border-blue-500/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.24em]">TypeScript</span>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="https://silent-help-six.vercel.app"
               target="_blank"
@@ -72,27 +73,27 @@ export default function FeaturedProject() {
               Visit Live Site
               <ArrowUpRight className="h-4 w-4" />
             </a>
+            
+            <a
+              href="https://github.com/Senuka9/silent-help"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-7 py-3.5 text-sm font-semibold text-slate-300 transition-all duration-300 hover:bg-white/10 hover:-translate-y-1 hover:text-white"
+            >
+              <Github className="h-4 w-4" />
+              Source Code
+            </a>
           </div>
         </div>
         
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl group-hover:border-cyan-400/40 transition-all duration-500 lg:scale-[1.02] group-hover:shadow-[0_20px_40px_-20px_rgba(34,211,238,0.3)]">
-          <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-0 gap-4">
-            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
-            <p className="text-xs font-medium text-slate-400 animate-pulse tracking-widest uppercase">Loading Interface...</p>
-          </div>
-          {/* We scale the iframe down slightly and transform origin to top left to fit more of the page in the view */}
-          <div className="absolute w-[125%] h-[125%] origin-top-left scale-[0.8] z-10 transition-opacity duration-700 opacity-90 group-hover:opacity-100">
-            <iframe 
-              src="https://silent-help-six.vercel.app" 
-              className="w-full h-full pointer-events-none"
-              style={{ border: 'none' }}
-              title="Silent Help Live Preview"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin"
-            />
-          </div>
-          
-          {/* Overlay to catch clicks and redirect to the actual site instead of interacting with iframe */}
+          <Image 
+            src="/images/silent-help.jpg"
+            alt="Silent Help Dashboard Mockup"
+            fill
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
           <a 
             href="https://silent-help-six.vercel.app"
             target="_blank"
