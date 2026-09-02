@@ -87,20 +87,21 @@ export default function FeaturedProject() {
         </div>
         
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl group-hover:border-cyan-400/40 transition-all duration-500 lg:scale-[1.02] group-hover:shadow-[0_20px_40px_-20px_rgba(34,211,238,0.3)]">
-          <Image 
-            src="/images/silent-help.jpg"
-            alt="Silent Help Dashboard Mockup"
-            fill
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          <a 
-            href="https://silent-help-six.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 z-20"
-            aria-label="Visit Silent Help"
-          />
+          <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-0 gap-4">
+            <div className="w-8 h-8 border-4 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
+            <p className="text-xs font-medium text-slate-400 animate-pulse tracking-widest uppercase">Loading Interface...</p>
+          </div>
+          
+          <div className="absolute w-[125%] h-[125%] origin-top-left scale-[0.8] z-10 transition-opacity duration-700 opacity-90 group-hover:opacity-100">
+            <iframe 
+              src="https://silent-help-six.vercel.app" 
+              className="w-full h-full"
+              style={{ border: 'none' }}
+              title="Silent Help Live Preview"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            />
+          </div>
         </div>
       </div>
     </motion.div>

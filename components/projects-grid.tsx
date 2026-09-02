@@ -185,7 +185,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[minmax(18rem,auto)] lg:gap-8">
       {projects.map((repo, idx) => (
-        <ProjectCard key={repo.id} repo={repo} idx={idx} featured={idx === 0} />
+        <ProjectCard key={repo.id} repo={repo} idx={idx} featured={false} />
       ))}
     </div>
   );
